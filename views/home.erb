@@ -1,0 +1,69 @@
+<table class="table-striped" id="employees">
+  <thead>
+    <tr>
+      <th>Employee ID</th>
+      <th>Employee Name</th>
+      <th>Division</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <% @employees.each do |e| %>
+    <tr>
+      <td>
+        <a href="/employees/<%= e.id() %>"><%= e.id() %></a>
+      </td>
+      <td>
+        <a href="/employees/<%= e.id() %>"><%= e.name() %></a>
+      </td>
+      <td>
+        Division
+      </td>
+      <td>
+        <form action="/employees/<%= e.id() %>/delete" method="post">
+          <input name="_method" type="hidden" value="delete">
+          <button type="submit" class="btn btn-lg">&#9986;</button>
+        </form>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<table class="table-striped" id="divisions">
+  <thead>
+    <tr>
+      <th>Division Name</th>
+      <th>Assigned Employees</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <% @divisions.each do |d| %>
+    <tr>
+      <td>
+        <a href="/divisions/<%= d.id()%>"><%= d.name() %></a>
+      </td>
+      <td>
+        Employees
+      </td>
+      <td>
+        <form action="/divisions/<%= d.id() %>/delete" method="post">
+          <input name="_method" type="hidden" value="delete">
+          <button type="submit" class="btn btn-lg">&#9986;</button>
+        </form>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<form action="/divisions/add" method="post">
+  <label for="division">Add a division</label>
+  <input name="division" type="text" placeholder="division">
+
+  <button type="submit">Add</button>
+</form>
+
+<form action="/employees/add" method="post">
+  <label for="employee">Add an employee</label>
+  <input name="employee" type="text" placeholder="name">
+
+  <button type="submit">Add</button>
+</form>
