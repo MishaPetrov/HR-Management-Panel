@@ -1,4 +1,4 @@
-class AddTables < ActiveRecord::Migration[5.1]
+class CreateTables < ActiveRecord::Migration[5.1]
   def change
     create_table(:employees) do |e|
       e.column(:name, :string)
