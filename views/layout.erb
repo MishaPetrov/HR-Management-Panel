@@ -2,15 +2,19 @@
 <html>
   <head>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='../css/styles.css'>
+    <link rel='stylesheet' href='<%= url('css/styles.css') %>'>
     <script type='text/javascript' src='../js/scripts.js'></script>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
     <title>Employee Tracker</title>
   </head>
   <body>
+    <div id="left"></div>
+    <div id="right"></div>
+    <div id="top"></div>
+    <div id="bottom"></div>
     <div class='container'>
       <div class="jumbotron">
-        Employee Tracker
+        <a href="/">HR Management Panel</a>
       </div>
       <%= yield %>
     </div>

@@ -1,1 +1,58 @@
-<h3><%= @division.name %></h3>
+<h3>Division: <%= @division.name %></h3>
+<div class="panel">
+  <div class="panel-heading">List of Employees in This Division</div>
+  <div class="panel-body">
+    <table class="table-hover">
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Employee Name</th>
+        </tr>
+      </thead>
+      <% @division.employees.each do |e| %>
+        <tr>
+          <td>
+            <a href="/employees/<%= e.id() %>"><%= e.id() %></a>
+          </td>
+          <td>
+            <a href="/employees/<%= e.id() %>"><%= e.name() %></a>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-heading">Edit Division Info</div>
+  <div class="panel-body">
+    <table class="table-hover" id="divisions">
+      <thead>
+        <tr>
+          <th>Division Name</th>
+          <th>Save</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>
+          <form action="/divisions/<%= @division.id()%>/edit" method="post">
+            <input name="_method" type="hidden" value="patch">
+            <div class="form-group">
+              <input name="division" value="<%= @division.name %>" class="form-control" type="text">
+            </div>
+        </td>
+        <td>
+            <button type="submit" class="btn-lg">Submit</button>
+          </form>
+        </td>
+        <td>
+          <form action="/divisions/<%= @division.id()%>/delete" method="post">
+            <input name="_method" type="hidden" value="delete">
+            <button type="submit" class="btn-lg">Delete Division</button>
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

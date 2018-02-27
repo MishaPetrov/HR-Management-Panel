@@ -29,15 +29,15 @@ post('/employees/add') do
   erb(:home)
 end
 
-delete("/employees/:id/delete") do
-  @employee = Employee.find(params.fetch("id").to_i())
-  @employee.delete()
-  @employees = Employee.all
+get('/employees/:id') do
   @divisions = Division.all
-  erb(:home)
+  id = params.fetch(:id)
+  @employee = Employee.find(id)
+  erb(:employee)
 end
 
-get('/employees/:id') do
+post('/employees/:id') do
+  @divisions = Division.all
   id = params.fetch(:id)
   @employee = Employee.find(id)
   erb(:employee)
@@ -49,8 +49,37 @@ get('/divisions/:id') do
   erb(:division)
 end
 
+patch("/employees/:id/edit") do
+  name = params.fetch("name")
+  division_id = params[:division_id]
+  @employee = Employee.find(params.fetch("id").to_i())
+  @employee.update({:name => name, :division_id => division_id})
+  @divisions = Division.all
+  erb(:employee)
+end
+
+delete("/employees/:id/delete") do
+  @employee = Employee.find(params.fetch("id").to_i())
+  @employee.delete()
+  @employees = Employee.all
+  @divisions = Division.all
+  erb(:home)
+end
+
+patch("/divisions/:id/edit") do
+  division = params.fetch("division")
+  @division = Division.find(params.fetch("id").to_i())
+  @division.update({:name => division})
+  @divisions = Division.all
+  erb(:division)
+end
+
 delete("/divisions/:id/delete") do
   @division = Division.find(params.fetch("id").to_i())
+  assigned_employees = Employee.where(division_id: @division.id)
+  assigned_employees.each do |e|
+    e.update({:division_id => nil})
+  end
   @division.delete()
   @employees = Employee.all
   @divisions = Division.all
