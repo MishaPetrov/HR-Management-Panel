@@ -1,4 +1,4 @@
-# Employee Tracker
+# HR Management Panel
 
 #### _Simple app to tracks employees and divisions_
 
